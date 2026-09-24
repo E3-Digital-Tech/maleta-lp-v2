@@ -227,6 +227,82 @@ css2 = """
 """
 h = h.replace('/* ---------- mobile ---------- */', css2 + '\n/* ---------- mobile ---------- */', 1)
 
+
+# ---------- planos: cabeça nova ----------
+h = h.replace('<div class="eyebrow rv">Escolha pelo que trava o seu escritório</div>', '<div class="eyebrow rv">Escolha a Maleta pelo que está travando o seu escritório</div>')
+h = h.replace('<h2 class="h-lg ttl rv" data-d="1">Cada tamanho resolve <span class="hl">um conjunto de travas.</span></h2>',
+              '<h2 class="h-lg ttl rv" data-d="1">Cada plano resolve <span class="hl">um nível diferente de gargalo.</span></h2>')
+h = h.replace('<p class="plans-key rv" data-d="2"><span class="hot">Pagamento único, sem mensalidade e sem software para assinar.</span> Leia o que cada plano resolve, escolha o seu e receba tudo no e-mail em seguida.</p>',
+              '<p class="plans-key rv" data-d="2"><span class="hot">Acesso vitalício. Pagamento único. Sem mensalidade. Sem software para assinar.</span> Escolha o nível de estrutura que seu escritório precisa e receba acesso imediato à sua Maleta.</p>')
+
+# ---------- garantia + amostra ----------
+a = h.index('<div class="two">'); b = h.index('<!-- ================= FAQ')
+h = h[:a] + """<div class="two">
+      <div class="it rv">
+        <div class="eyebrow">Você não precisa acreditar na nossa promessa</div>
+        <h3>Abra a Maleta. Teste. Use. <span class="hl">E decida.</span></h3>
+        <div class="big">7 dias</div>
+        <div class="gl">de garantia</div>
+        <p>Você terá 7 dias para abrir os materiais, conhecer a estrutura e começar a aplicar no seu escritório.</p>
+        <p>Se depois de testar você entender que a Maleta não faz sentido para o seu momento, basta solicitar o reembolso dentro do prazo. Você recebe 100% do seu investimento de volta.</p>
+        <div class="sem"><span>Sem justificativa.</span><span>Sem burocracia.</span><span>Sem ficar preso.</span></div>
+        <p class="risco">O risco fica com a gente.</p>
+        <a class="btn btn--hot" href="#planos">Quero abrir a Maleta</a>
+      </div>
+      <div class="it rv" data-d="1">
+        <div class="eyebrow">Antes de comprar, teste uma parte</div>
+        <h3>Quer saber como é o conteúdo <span class="hl">antes de entrar?</span></h3>
+        <p>Vamos te entregar um dos scripts que você encontra dentro da Maleta. <b class="hot">Grátis.</b></p>
+        <p>Um script de follow-up desenvolvido para uma das situações que mais fazem escritórios perderem oportunidades: o lead demonstrou interesse, mas parou de responder.</p>
+        <p>Deixe seu e-mail. Receba o material gratuitamente. Leia. Aplique. E veja na prática o nível de profundidade da Maleta.</p>
+        <form class="form" id="amostra" novalidate>
+          <input type="email" name="email" placeholder="seu@email.com" required autocomplete="email">
+          <button class="btn btn--hot" type="submit">Quero receber o script</button>
+          <span class="ok">Enviado. Confere a caixa de entrada em um minuto.</span>
+        </form>
+        <p class="depois">Gostou desse? Então imagine ter acesso à estrutura completa. <a href="#planos">Ver os planos</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+""" + h[b:]
+
+# ---------- fechamento com o contador ----------
+a = h.index('<section class="sec final" id="fim">'); b = h.index('<footer>')
+h = h[:a] + """<section class="sec final" id="fim">
+  <div class="wrap">
+    <div class="eyebrow rv">Pare de começar mais uma semana do zero</div>
+    <h2 class="h-lg ttl rv" data-d="1">Comece a próxima semana com o marketing e o comercial do seu escritório <span class="hl">estruturados.</span></h2>
+    <div class="bigtimer ttl rv" data-d="2" data-timer><b>07</b><s>:</s><b>41</b><s>:</s><b>23</b></div>
+    <p class="lede rv" data-d="3">O acesso à Maleta continua. A condição de lançamento, não. Quando o contador chegar a zero, os valores de lançamento serão encerrados.</p>
+    <p class="ou rv" data-d="3">Você pode continuar improvisando na próxima semana. Ou pode começar a próxima semana com a <span class="hot">Maleta do Advogado.</span></p>
+    <div class="ctas rv" data-d="3">
+      <a class="btn btn--hot" href="#planos">Quero abrir a Maleta</a>
+    </div>
+  </div>
+</section>
+
+""" + h[b:]
+
+css3 = """
+/* garantia + amostra, v2 */
+.two .it .eyebrow{margin-bottom:2px;width:auto;min-width:0;max-width:100%}
+.two .gl{font-size:.7rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--t-3);margin-top:-6px}
+.two .sem{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:4px}
+.two .sem span{font-size:.95rem;font-weight:600;color:#fff;padding-left:16px;position:relative}
+.two .sem span::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:1px;background:var(--o)}
+.two .risco{font-family:var(--ffd);font-weight:600;font-size:1.2rem;letter-spacing:-.02em;color:#fff}
+.two .it .btn{align-self:flex-start;margin-top:6px}
+.two .depois{font-size:.9rem;color:var(--t-3)}
+.two .depois a{color:#fff;font-weight:600;border-bottom:1px solid var(--o);padding-bottom:1px;margin-left:6px}
+/* fechamento, v2 */
+.final h2{max-width:22ch;margin:16px auto 0}
+.final .bigtimer{margin-top:30px}
+.final .ou{margin:22px auto 0;max-width:40ch;font-family:var(--ffd);font-weight:600;font-size:clamp(1.2rem,2vw,1.6rem);line-height:1.3;letter-spacing:-.02em;color:#fff}
+"""
+h = h.replace('/* ---------- mobile ---------- */', css3 + '\n/* ---------- mobile ---------- */', 1)
+
 # apertar o vazio: entregáveis colam no herói, planos colam nos entregáveis
 h = h.replace('<section class="sec" id="dentro">', '<section class="sec" id="dentro" style="padding-top:clamp(24px,4vw,56px)">')
 h = h.replace('<section class="sec" id="planos">', '<section class="sec" id="planos" style="padding-top:0">')
