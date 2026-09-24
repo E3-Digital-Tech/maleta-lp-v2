@@ -137,7 +137,7 @@ p.rv,.lede.rv{transition:opacity .7s cubic-bezier(.16,.84,.34,1),transform .7s c
 .dleg span{display:flex;align-items:center;gap:7px}.dleg b{width:8px;height:8px;border-radius:50%;display:block}
 
 /* ---------- seções ---------- */
-.sec{position:relative;padding:clamp(80px,10vw,140px) 0}
+.sec{position:relative;padding:clamp(80px,10vw,140px) 0;scroll-margin-top:calc(var(--top) - 10px)}
 .sec .head{display:grid;grid-template-columns:1.1fr .9fr;gap:28px 64px;align-items:end;margin-bottom:clamp(36px,5vw,64px)}
 .sec .head .eyebrow{margin-bottom:16px}
 .sec .head .lede{justify-self:end}
@@ -388,7 +388,7 @@ footer img{height:18px;width:auto;opacity:.7}
   .stat:nth-child(3){border-left:0;padding-left:0;border-top:1px solid var(--hair-2)}
   .stat:nth-child(4){border-top:1px solid var(--hair-2)}
   .inside{grid-template-columns:1fr}
-  .stick{position:sticky;top:var(--top);height:40vh;height:40svh;background:linear-gradient(180deg,#000 72%,transparent);z-index:3}
+  .stick{position:static;height:auto;padding:6px 0 10px}
   .stick canvas{max-width:none;width:104%;height:auto}
   .comps{padding:6px 0 0}
   .comp{grid-template-columns:1fr;gap:14px;padding:26px 0}
@@ -706,6 +706,7 @@ function stage1Tick(){
 const stage2=$('#stage2');
 function stage2Tick(){
   const r=stage2.getBoundingClientRect(),vh=innerHeight;
+  if(mob()){const c=$('.stick').getBoundingClientRect();abre.set(clamp((vh*.95-c.top)/(vh*.75),0,1));return}
   const start=vh*.85,end=-(stage2.offsetHeight-vh*.6);
   abre.set(Math.min(1,clamp((start-r.top)/(start-end),0,1)*1.25));
 }

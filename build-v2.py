@@ -303,6 +303,16 @@ css3 = """
 """
 h = h.replace('/* ---------- mobile ---------- */', css3 + '\n/* ---------- mobile ---------- */', 1)
 
+# títulos: âncoras param abaixo do header; no celular a maleta que abre deixa de ser fixa e não cobre mais os títulos
+h = h.replace('.sec{position:relative;padding:clamp(80px,10vw,140px) 0}', '.sec{position:relative;padding:clamp(80px,10vw,140px) 0;scroll-margin-top:calc(var(--top) - 10px)}')
+h = h.replace('  .stick{position:sticky;top:var(--top);height:40vh;height:40svh;background:linear-gradient(180deg,#000 72%,transparent);z-index:3}',
+              '  .stick{position:static;height:auto;padding:6px 0 10px}')
+h = h.replace("""  const start=vh*.85,end=-(stage2.offsetHeight-vh*.6);
+  abre.set(Math.min(1,clamp((start-r.top)/(start-end),0,1)*1.25));""",
+              """  if(mob()){const c=$('.stick').getBoundingClientRect();abre.set(clamp((vh*.95-c.top)/(vh*.75),0,1));return}
+  const start=vh*.85,end=-(stage2.offsetHeight-vh*.6);
+  abre.set(Math.min(1,clamp((start-r.top)/(start-end),0,1)*1.25));""")
+
 # apertar o vazio: entregáveis colam no herói, planos colam nos entregáveis
 h = h.replace('<section class="sec" id="dentro">', '<section class="sec" id="dentro" style="padding-top:clamp(24px,4vw,56px)">')
 h = h.replace('<section class="sec" id="planos">', '<section class="sec" id="planos" style="padding-top:0">')
