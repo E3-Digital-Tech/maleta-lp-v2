@@ -313,6 +313,12 @@ h = h.replace("""  const start=vh*.85,end=-(stage2.offsetHeight-vh*.6);
   const start=vh*.85,end=-(stage2.offsetHeight-vh*.6);
   abre.set(Math.min(1,clamp((start-r.top)/(start-end),0,1)*1.25));""")
 
+# palavras animadas: folga em cima e embaixo na caixa de overflow, senão o topo das letras corta (Inter Tight é mais alta que a linha .96)
+old_w = '.w{display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 .02em .1em;margin:0 -.02em -.1em}'
+assert old_w in h
+h = h.replace(old_w, '.w{display:inline-block;overflow:hidden;vertical-align:bottom;padding:.16em .03em .14em;margin:-.16em -.03em -.14em}')
+h = h.replace('.w i{display:inline-block;font-style:normal;transform:translateY(112%);', '.w i{display:inline-block;font-style:normal;transform:translateY(125%);')
+
 # apertar o vazio: entregáveis colam no herói, planos colam nos entregáveis
 h = h.replace('<section class="sec" id="dentro">', '<section class="sec" id="dentro" style="padding-top:clamp(24px,4vw,56px)">')
 h = h.replace('<section class="sec" id="planos">', '<section class="sec" id="planos" style="padding-top:0">')
