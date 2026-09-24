@@ -14,4 +14,9 @@ await page.evaluate(() => { const el = document.querySelector('#planos h2'); scr
 await new Promise(r => setTimeout(r, 2500));
 b = await page.evaluate(() => { const r = document.querySelector('#planos h2').getBoundingClientRect(); return { x: r.x - 20, y: r.y + scrollY - 40, width: r.width + 40, height: r.height + 80 }; });
 await page.screenshot({ path: 'shots/t/word-shown.png', clip: b, captureBeyondViewport: true });
+b = await page.evaluate(() => { const r = document.querySelector('.plans-key').getBoundingClientRect(); return { x: r.x - 20, y: r.y + scrollY - 30, width: r.width + 40, height: r.height + 60 }; });
+await page.screenshot({ path: 'shots/t/key.png', clip: b, captureBeyondViewport: true });
+await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' })); await new Promise(r => setTimeout(r, 2500));
+b = await page.evaluate(() => { const r = document.querySelector('h1').getBoundingClientRect(); return { x: r.x - 20, y: r.y + scrollY - 40, width: r.width + 40, height: r.height + 80 }; });
+await page.screenshot({ path: 'shots/t/h1.png', clip: b, captureBeyondViewport: true });
 await browser.close();

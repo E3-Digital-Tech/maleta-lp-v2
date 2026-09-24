@@ -317,7 +317,9 @@ h = h.replace("""  const start=vh*.85,end=-(stage2.offsetHeight-vh*.6);
 old_w = '.w{display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 .02em .1em;margin:0 -.02em -.1em}'
 assert old_w in h
 h = h.replace(old_w, '.w{display:inline-block;overflow:hidden;vertical-align:bottom;padding:.16em .03em .14em;margin:-.16em -.03em -.14em}')
-h = h.replace('.w i{display:inline-block;font-style:normal;transform:translateY(112%);', '.w i{display:inline-block;font-style:normal;transform:translateY(125%);')
+h = h.replace('.w i{display:inline-block;font-style:normal;transform:translateY(112%);', '.w i{display:inline-block;font-style:normal;padding:.18em 0 .16em;margin:-.18em 0 -.16em;transform:translateY(125%);')
+h = h.replace('.hl{background:linear-gradient(180deg,#fff 0%,#8f8f8f 100%);', '.hl{padding:.18em 0 .16em;margin:-.18em 0 -.16em;background:linear-gradient(180deg,#fff 0%,#8f8f8f 100%);')
+h = h.replace('.hot{background:var(--og);', '.hot{padding:.18em 0 .16em;margin:-.18em 0 -.16em;background:var(--og);')
 
 # apertar o vazio: entregáveis colam no herói, planos colam nos entregáveis
 h = h.replace('<section class="sec" id="dentro">', '<section class="sec" id="dentro" style="padding-top:clamp(24px,4vw,56px)">')
