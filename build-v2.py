@@ -91,8 +91,12 @@ h = h.replace('<p class="lede rv" data-d="2">Sem mensalidade e sem software para
               '<p class="plans-key rv" data-d="2"><span class="hot">Pagamento único, sem mensalidade e sem software para assinar.</span> Leia o que cada plano resolve, escolha o seu e receba tudo no e-mail em seguida.</p>')
 h = h.replace('.plans-head .lede{margin:18px auto 0;text-align:center}',
               '''.plans-head .lede{margin:18px auto 0;text-align:center}
-.plans-key{margin:22px auto 0;max-width:34ch;font-family:var(--ffd);font-weight:600;font-size:clamp(1.25rem,2vw,1.7rem);line-height:1.3;letter-spacing:-.02em;color:var(--t-2)}
-.plans-key .hot{display:block;margin-bottom:6px}''')
+.plans-key{margin:22px auto 0;max-width:40ch;font-family:var(--ffd);font-weight:600;font-size:clamp(1.25rem,2vw,1.7rem);line-height:1.3;letter-spacing:-.02em;color:var(--t-2)}
+.plans-key .kbox{display:inline-block;max-width:30ch;padding:16px 26px;border:1px solid rgba(255,150,90,.38);border-radius:18px;background:var(--card);margin-bottom:18px}
+.plans-key .hot{display:block}
+.plans-key p{max-width:34ch;margin-inline:auto}
+.plans-head .eyebrow{margin-inline:auto}
+.plans-head h2{max-width:24ch;text-wrap:balance}''')
 
 # ---------- JS ----------
 a = h.index('const KF=['); b = h.index('];', a) + 2
@@ -233,7 +237,7 @@ h = h.replace('<div class="eyebrow rv">Escolha pelo que trava o seu escritório<
 h = h.replace('<h2 class="h-lg ttl rv" data-d="1">Cada tamanho resolve <span class="hl">um conjunto de travas.</span></h2>',
               '<h2 class="h-lg ttl rv" data-d="1">Cada plano resolve <span class="hl">um nível diferente de gargalo.</span></h2>')
 h = h.replace('<p class="plans-key rv" data-d="2"><span class="hot">Pagamento único, sem mensalidade e sem software para assinar.</span> Leia o que cada plano resolve, escolha o seu e receba tudo no e-mail em seguida.</p>',
-              '<p class="plans-key rv" data-d="2"><span class="hot">Acesso vitalício. Pagamento único. Sem mensalidade. Sem software para assinar.</span> Escolha o nível de estrutura que seu escritório precisa e receba acesso imediato à sua Maleta.</p>')
+              '<div class="plans-key rv" data-d="2"><div class="kbox"><span class="hot">Acesso vitalício. Pagamento único. Sem mensalidade. Sem software para assinar.</span></div><p>Escolha o nível de estrutura que seu escritório precisa e receba acesso imediato à sua Maleta.</p></div>')
 
 # ---------- garantia + amostra ----------
 a = h.index('<div class="two">'); b = h.index('<!-- ================= FAQ')
@@ -243,9 +247,9 @@ h = h[:a] + """<div class="two">
         <h3>Abra a Maleta. Teste. Use. <span class="hl">E decida.</span></h3>
         <div class="big">7 dias</div>
         <div class="gl">de garantia</div>
-        <p>Você terá 7 dias para abrir os materiais, conhecer a estrutura e começar a aplicar no seu escritório.</p>
-        <p>Se depois de testar você entender que a Maleta não faz sentido para o seu momento, basta solicitar o reembolso dentro do prazo. Você recebe 100% do seu investimento de volta.</p>
-        <div class="sem"><span>Sem justificativa.</span><span>Sem burocracia.</span><span>Sem ficar preso.</span></div>
+        <div class="gbox"><p>Você terá 7 dias para abrir os materiais, conhecer a estrutura e começar a aplicar no seu escritório.</p></div>
+        <div class="gbox"><p>Se depois de testar você entender que a Maleta não faz sentido para o seu momento, basta solicitar o reembolso dentro do prazo. Você recebe 100% do seu investimento de volta.</p></div>
+        <div class="gbox sem"><span>Sem justificativa.</span><span>Sem burocracia.</span><span>Sem ficar preso.</span></div>
         <p class="risco">O risco fica com a gente.</p>
         <a class="btn btn--hot" href="#planos">Quero abrir a Maleta</a>
       </div>
@@ -289,8 +293,10 @@ css3 = """
 /* garantia + amostra, v2 */
 .two .it .eyebrow{margin-bottom:2px;width:auto;min-width:0;max-width:100%}
 .two .gl{font-size:.7rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--t-3);margin-top:-6px}
-.two .sem{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:4px}
-.two .sem span{font-size:.95rem;font-weight:600;color:#fff;padding-left:16px;position:relative}
+.two .gbox{background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:18px 20px}
+.two .gbox p{max-width:none}
+.two .sem{display:flex;flex-direction:column;gap:10px}
+.two .sem span{font-size:1rem;font-weight:600;color:#fff;padding-left:18px;position:relative}
 .two .sem span::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:1px;background:var(--o)}
 .two .risco{font-family:var(--ffd);font-weight:600;font-size:1.2rem;letter-spacing:-.02em;color:#fff}
 .two .it .btn{align-self:flex-start;margin-top:6px}
@@ -344,8 +350,71 @@ cssd = """
 """
 h = h.replace('/* ---------- mobile ---------- */', cssd + '\n/* ---------- mobile ---------- */', 1)
 
+
+# ---------- travas com ícone de linha ----------
+ICO = {
+ 'postar': '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
+ 'atender': '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/>',
+ 'reuniao': '<circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.2A5 5 0 0 1 21 19"/>',
+ 'followup': '<path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 4v5h-5"/><path d="M12 8v4l3 2"/>',
+ 'objecoes': '<path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6Z"/><path d="M9.5 12l1.8 1.8L15 10"/>',
+ 'numeros': '<path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/>',
+ 'dinheiro': '<path d="M3 7l6 6 4-4 8 8"/><path d="M21 12v5h-5"/>',
+}
+def ico(k): return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICO[k] + '</svg>'
+TR = [('postar','O que postar.'),('atender','Como atender.'),('reuniao','Como conduzir uma reunião.'),('followup','Como fazer follow-up.'),('objecoes','Como lidar com objeções.'),('numeros','Como acompanhar os números.'),('dinheiro','Como saber onde o dinheiro está sendo perdido.')]
+old_tr = '<div class="travas rv"><span>O que postar.</span><span>Como atender.</span><span>Como conduzir uma reunião.</span><span>Como fazer follow-up.</span><span>Como lidar com objeções.</span><span>Como acompanhar os números.</span><span>Como saber onde o dinheiro está sendo perdido.</span></div>'
+assert old_tr in h
+h = h.replace(old_tr, '<div class="travas rv">' + ''.join(f'<span>{ico(k)}{t}</span>' for k, t in TR) + '</div>')
+h = h.replace('.travas span{font-size:.97rem;color:var(--t-2);padding-left:18px;position:relative;line-height:1.4}\n.travas span::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:1px;background:var(--o)}',
+              '.travas span{font-size:.97rem;color:var(--t-2);display:flex;align-items:center;gap:12px;line-height:1.4}\n.travas svg{width:22px;height:22px;flex:none;color:var(--o-warm)}')
+
+# ---------- fechamento: três caixas com motion ----------
+old_tres = '<div class="tres"><div><b>Marketing</b>para gerar demanda e ter uma presença no digital.</div><div><b>Comercial</b>para transformar demanda em contratos.</div><div><b>Gestão</b>para saber o que está funcionando.</div></div>'
+assert old_tres in h
+h = h.replace(old_tres, """<div class="tres">
+        <div class="tcard rv"><small>01</small><b>Marketing</b><p>para gerar demanda e ter uma presença no digital.</p></div>
+        <div class="tcard rv" data-d="1"><small>02</small><b>Comercial</b><p>para transformar demanda em contratos.</p></div>
+        <div class="tcard rv" data-d="2"><small>03</small><b>Gestão</b><p>para saber o que está funcionando.</p></div>
+      </div>""")
+old_css = """.fecho .tres{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;width:100%;border-top:1px solid var(--hair-2);border-bottom:1px solid var(--hair-2);padding:28px 0}
+.fecho .tres div{font-size:.97rem;line-height:1.5;color:var(--t-2);padding:0 16px}
+.fecho .tres b{display:block;font-family:var(--ffd);font-size:1.25rem;font-weight:700;color:#fff;margin-bottom:6px;letter-spacing:-.02em}"""
+assert old_css in h
+h = h.replace(old_css, """.fecho .tres{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%}
+.tcard{position:relative;text-align:left;padding:26px 24px 24px;border-radius:18px;background:var(--card);border:1px solid var(--hair);overflow:hidden;transition:opacity .7s cubic-bezier(.16,.84,.34,1),transform .7s cubic-bezier(.16,.84,.34,1),border-color .3s}
+.tcard::before{content:"";position:absolute;left:0;top:0;height:2px;width:100%;background:var(--og);transform:scaleX(0);transform-origin:left;transition:transform 1s cubic-bezier(.2,.8,.2,1) .35s}
+.tcard::after{content:"";position:absolute;inset:auto -30% -55% -30%;height:80%;background:radial-gradient(ellipse at 50% 100%,rgba(255,107,0,.22),transparent 65%);opacity:0;transition:opacity .9s .4s}
+.tcard.in::before{transform:scaleX(1)}
+.tcard.in::after{opacity:1}
+.tcard:hover{border-color:rgba(255,150,90,.45)}
+.tcard small{display:block;font-size:.64rem;font-weight:600;letter-spacing:.3em;margin-bottom:12px;background:var(--og);-webkit-background-clip:text;background-clip:text;color:transparent;width:max-content}
+.tcard b{display:block;font-family:var(--ffd);font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:8px;letter-spacing:-.025em;line-height:1}
+.tcard p{font-size:.97rem;line-height:1.5;color:var(--t-2);position:relative}
+.rv[data-d="1"].tcard{transition-delay:.12s}.rv[data-d="2"].tcard{transition-delay:.24s}""")
+
 # apertar o vazio: entregáveis colam no herói, planos colam nos entregáveis
 h = h.replace('<section class="sec" id="dentro">', '<section class="sec" id="dentro" style="padding-top:clamp(24px,4vw,56px)">')
 h = h.replace('<section class="sec" id="planos">', '<section class="sec" id="planos" style="padding-top:0">')
+
+# ---------- seções claras: planos e perguntas (garantia escura no meio) ----------
+h = h.replace('<section class="sec" id="planos" style="padding-top:0">', '<section class="sec sec--light" id="planos">')
+h = h.replace('<section class="sec" id="garantia" style="padding-top:0">', '<section class="sec" id="garantia">')
+h = h.replace('<section class="sec" id="duvidas" style="padding-top:0">', '<section class="sec sec--light" id="duvidas">')
+cssl = """
+/* seções claras */
+.sec--light{background:#f7f6f3;color:#111;--t-1:#111;--t-2:rgba(0,0,0,.72);--t-3:rgba(0,0,0,.5);--t-4:rgba(0,0,0,.3);--hair:rgba(0,0,0,.12);--hair-2:rgba(0,0,0,.09);--card:rgba(0,0,0,.035)}
+.sec--light .ttl{color:#111}
+.sec--light .hl,.sec--light .hl .w i{background:linear-gradient(180deg,#111 0%,#8a8a8a 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sec--light .hl:has(.w){background:none;color:inherit}
+.sec--light .plans-key .kbox{background:#fff;border-color:rgba(255,107,0,.35);box-shadow:0 10px 30px -18px rgba(0,0,0,.25)}
+.sec--light .plan{--t-1:#fff;--t-2:rgba(255,255,255,.72);--t-3:rgba(255,255,255,.48);--t-4:rgba(255,255,255,.26);--hair:rgba(255,255,255,.09);--hair-2:rgba(255,255,255,.055);color:#fff}
+.sec--light .btn--line{border-color:rgba(255,255,255,.16);color:#fff}
+.sec--light .q button{color:#111}
+.sec--light ::selection{background:var(--o);color:#fff}
+.sec--light .eyebrow,.sec--light .plans-key .hot,.sec--light .hot{background:linear-gradient(96deg,#d95500 0%,#ff6b00 60%,#ff8a3c 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+"""
+h = h.replace('/* ---------- mobile ---------- */', cssl + '\n/* ---------- mobile ---------- */', 1)
+
 open('index.html', 'w', encoding='utf-8').write(h)
 print('ok', len(h.splitlines()), 'linhas')
