@@ -92,7 +92,7 @@ h = h.replace('<p class="lede rv" data-d="2">Sem mensalidade e sem software para
 h = h.replace('.plans-head .lede{margin:18px auto 0;text-align:center}',
               '''.plans-head .lede{margin:18px auto 0;text-align:center}
 .plans-key{margin:22px auto 0;max-width:40ch;font-family:var(--ffd);font-weight:600;font-size:clamp(1.25rem,2vw,1.7rem);line-height:1.3;letter-spacing:-.02em;color:var(--t-2)}
-.plans-key .kbox{display:inline-block;max-width:30ch;padding:16px 26px;border:1px solid rgba(255,150,90,.38);border-radius:18px;background:var(--card);margin-bottom:18px}
+.plans-key .kbox{display:inline-block;max-width:32ch;text-wrap:balance;padding:16px 26px;border:1px solid rgba(255,150,90,.38);border-radius:18px;background:var(--card);margin-bottom:18px}
 .plans-key .hot{display:block}
 .plans-key p{max-width:34ch;margin-inline:auto}
 .plans-head .eyebrow{margin-inline:auto}
@@ -237,7 +237,7 @@ h = h.replace('<div class="eyebrow rv">Escolha pelo que trava o seu escritório<
 h = h.replace('<h2 class="h-lg ttl rv" data-d="1">Cada tamanho resolve <span class="hl">um conjunto de travas.</span></h2>',
               '<h2 class="h-lg ttl rv" data-d="1">Cada plano resolve <span class="hl">um nível diferente de gargalo.</span></h2>')
 h = h.replace('<p class="plans-key rv" data-d="2"><span class="hot">Pagamento único, sem mensalidade e sem software para assinar.</span> Leia o que cada plano resolve, escolha o seu e receba tudo no e-mail em seguida.</p>',
-              '<div class="plans-key rv" data-d="2"><div class="kbox"><span class="hot">Acesso vitalício. Pagamento único. Sem mensalidade. Sem software para assinar.</span></div><p>Escolha o nível de estrutura que seu escritório precisa e receba acesso imediato à sua Maleta.</p></div>')
+              '<div class="plans-key rv" data-d="2"><div class="kbox"><span class="hot">Acesso vitalício. Pagamento único. Sem mensalidade. Sem software para&nbsp;assinar.</span></div><p>Escolha o nível de estrutura que seu escritório precisa e receba acesso imediato à sua Maleta.</p></div>')
 
 # ---------- garantia + amostra ----------
 a = h.index('<div class="two">'); b = h.index('<!-- ================= FAQ')
