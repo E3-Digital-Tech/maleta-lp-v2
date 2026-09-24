@@ -321,6 +321,36 @@ h = h.replace('.w i{display:inline-block;font-style:normal;transform:translateY(
 h = h.replace('.hl{background:linear-gradient(180deg,#fff 0%,#8f8f8f 100%);', '.hl{padding:.18em 0 .16em;margin:-.18em 0 -.16em;background:linear-gradient(180deg,#fff 0%,#8f8f8f 100%);')
 h = h.replace('.hot{background:var(--og);', '.hot{padding:.18em 0 .16em;margin:-.18em 0 -.16em;background:var(--og);')
 
+
+# ---------- domo laranja nas bordas + corte dos gradientes grandes ----------
+h = h.replace('.two .big{font-family:var(--ffd);font-weight:700;font-size:clamp(3rem,6vw,5rem);line-height:.85;',
+              '.two .big{font-family:var(--ffd);font-weight:700;font-size:clamp(3rem,6vw,5rem);line-height:.85;padding:.2em 0 .18em;margin:-.2em 0 -.18em;')
+h = h.replace('.fecho .abra{font-family:var(--ffd);font-weight:700;font-size:clamp(2rem,5vw,4rem);letter-spacing:-.04em;line-height:1;',
+              '.fecho .abra{font-family:var(--ffd);font-weight:700;font-size:clamp(2rem,5vw,4rem);letter-spacing:-.04em;line-height:1;padding:.18em 0 .16em;margin:-.18em 0 -.16em;')
+h = h.replace('.comp .top .n{font-family:var(--ffd);font-weight:700;font-size:1rem;letter-spacing:-.01em;',
+              '.comp .top .n{font-family:var(--ffd);font-weight:700;font-size:1rem;letter-spacing:-.01em;padding:.2em 0;margin:-.2em 0;')
+
+h = h.replace('    <div id="obj"><canvas id="c1"', '    <div class="dome dome--top" aria-hidden="true"></div>\n    <div id="obj"><canvas id="c1"', 1)
+h = h.replace('<section class="sec final" id="fim">\n  <div class="wrap">', '<section class="sec final" id="fim">\n  <div class="dome dome--bot" aria-hidden="true"></div>\n  <div class="wrap">', 1)
+
+cssd = """
+/* domo: arco de luz + grade de pixels que se dissolve, laranja, só nas bordas (referência: comunidadecutpro) */
+.dome{position:absolute;left:0;right:0;height:min(62vh,64vw);pointer-events:none;overflow:hidden;z-index:0;--R:96vw;--edge:24vw}
+.dome--top{top:0;--cy:calc(var(--edge) - var(--R));--gy:-14%}
+.dome--bot{bottom:0;--edge:11vw;height:min(34vh,36vw);--cy:calc(100% - var(--edge) + var(--R));--gy:118%}
+.dome::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(circle at 50% var(--cy),transparent calc(var(--R) - 1.5px),rgba(255,170,100,.95) var(--R),rgba(255,107,0,.5) calc(var(--R) + 2px),rgba(255,107,0,.12) calc(var(--R) + 14px),transparent calc(var(--R) + 42px)),
+  radial-gradient(ellipse 74% 58% at 50% var(--gy),rgba(255,107,0,.5) 0%,rgba(255,70,0,.2) 42%,transparent 72%)}
+.dome::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#ff8a3c,#ff6b00);
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Crect width='2.6' height='2.6' fill='%23000'/%3E%3C/svg%3E"),radial-gradient(circle at 50% var(--cy),rgba(0,0,0,0) calc(var(--R) - 40vw),rgba(0,0,0,.22) calc(var(--R) - 12vw),rgba(0,0,0,.5) calc(var(--R) - 6px),transparent var(--R));
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Crect width='2.6' height='2.6' fill='%23000'/%3E%3C/svg%3E"),radial-gradient(circle at 50% var(--cy),rgba(0,0,0,0) calc(var(--R) - 40vw),rgba(0,0,0,.22) calc(var(--R) - 12vw),rgba(0,0,0,.5) calc(var(--R) - 6px),transparent var(--R));
+  -webkit-mask-composite:source-in;mask-composite:intersect;-webkit-mask-size:10px 10px,100% 100%;mask-size:10px 10px,100% 100%}
+.final{position:relative;overflow:hidden}
+.final .wrap{position:relative;z-index:1}
+@media (max-width:900px){.dome{--R:170vw;--edge:30vw;height:min(44vh,100vw)}.dome--bot{--edge:16vw;height:min(30vh,60vw)}}
+"""
+h = h.replace('/* ---------- mobile ---------- */', cssd + '\n/* ---------- mobile ---------- */', 1)
+
 # apertar o vazio: entregáveis colam no herói, planos colam nos entregáveis
 h = h.replace('<section class="sec" id="dentro">', '<section class="sec" id="dentro" style="padding-top:clamp(24px,4vw,56px)">')
 h = h.replace('<section class="sec" id="planos">', '<section class="sec" id="planos" style="padding-top:0">')
