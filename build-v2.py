@@ -87,8 +87,12 @@ h = swap_plan(h, 'pro', 'Tudo da Start, e ainda resolve:', pro)
 h = h.replace('<div class="eyebrow rv">Escolha o tamanho</div>', '<div class="eyebrow rv">Escolha pelo que trava o seu escritório</div>')
 h = h.replace('<h2 class="h-lg ttl rv" data-d="1">Três tamanhos de maleta. <span class="hl">Pagamento único.</span></h2>',
               '<h2 class="h-lg ttl rv" data-d="1">Cada tamanho resolve <span class="hl">um conjunto de travas.</span></h2>')
-h = h.replace('Sem mensalidade e sem software para assinar. Você escolhe o tamanho, paga uma vez e recebe tudo no e-mail em seguida.',
-              'Pagamento único, sem mensalidade e sem software para assinar. Leia o que cada plano resolve, escolha o seu e receba tudo no e-mail em seguida.')
+h = h.replace('<p class="lede rv" data-d="2">Sem mensalidade e sem software para assinar. Você escolhe o tamanho, paga uma vez e recebe tudo no e-mail em seguida.</p>',
+              '<p class="plans-key rv" data-d="2"><span class="hot">Pagamento único, sem mensalidade e sem software para assinar.</span> Leia o que cada plano resolve, escolha o seu e receba tudo no e-mail em seguida.</p>')
+h = h.replace('.plans-head .lede{margin:18px auto 0;text-align:center}',
+              '''.plans-head .lede{margin:18px auto 0;text-align:center}
+.plans-key{margin:22px auto 0;max-width:34ch;font-family:var(--ffd);font-weight:600;font-size:clamp(1.25rem,2vw,1.7rem);line-height:1.3;letter-spacing:-.02em;color:var(--t-2)}
+.plans-key .hot{display:block;margin-bottom:6px}''')
 
 # ---------- JS ----------
 a = h.index('const KF=['); b = h.index('];', a) + 2
