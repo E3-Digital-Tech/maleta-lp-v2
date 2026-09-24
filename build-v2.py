@@ -334,20 +334,13 @@ h = h.replace('    <div id="obj"><canvas id="c1"', '    <div class="dome dome--t
 h = h.replace('<section class="sec final" id="fim">\n  <div class="wrap">', '<section class="sec final" id="fim">\n  <div class="dome dome--bot" aria-hidden="true"></div>\n  <div class="wrap">', 1)
 
 cssd = """
-/* domo: arco de luz + grade de pixels que se dissolve, laranja, só nas bordas (referência: comunidadecutpro) */
-.dome{position:absolute;left:0;right:0;height:min(62vh,64vw);pointer-events:none;overflow:hidden;z-index:0;--R:96vw;--edge:24vw}
-.dome--top{top:0;--cy:calc(var(--edge) - var(--R));--gy:-14%}
-.dome--bot{bottom:0;--edge:11vw;height:min(34vh,36vw);--cy:calc(100% - var(--edge) + var(--R));--gy:118%}
-.dome::before{content:"";position:absolute;inset:0;background:
-  radial-gradient(circle at 50% var(--cy),transparent calc(var(--R) - 1.5px),rgba(255,170,100,.95) var(--R),rgba(255,107,0,.5) calc(var(--R) + 2px),rgba(255,107,0,.12) calc(var(--R) + 14px),transparent calc(var(--R) + 42px)),
-  radial-gradient(ellipse 74% 58% at 50% var(--gy),rgba(255,107,0,.5) 0%,rgba(255,70,0,.2) 42%,transparent 72%)}
-.dome::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#ff8a3c,#ff6b00);
-  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Crect width='2.6' height='2.6' fill='%23000'/%3E%3C/svg%3E"),radial-gradient(circle at 50% var(--cy),rgba(0,0,0,0) calc(var(--R) - 40vw),rgba(0,0,0,.22) calc(var(--R) - 12vw),rgba(0,0,0,.5) calc(var(--R) - 6px),transparent var(--R));
-  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Crect width='2.6' height='2.6' fill='%23000'/%3E%3C/svg%3E"),radial-gradient(circle at 50% var(--cy),rgba(0,0,0,0) calc(var(--R) - 40vw),rgba(0,0,0,.22) calc(var(--R) - 12vw),rgba(0,0,0,.5) calc(var(--R) - 6px),transparent var(--R));
-  -webkit-mask-composite:source-in;mask-composite:intersect;-webkit-mask-size:10px 10px,100% 100%;mask-size:10px 10px,100% 100%}
+/* domo: a imagem da referência com o matiz girado para o laranja da E3 (img/bg-dome.webp, 1920x1700) */
+.dome{position:absolute;left:0;right:0;pointer-events:none;z-index:0;background:url(img/bg-dome.webp) center top/cover no-repeat}
+.dome--top{top:0;bottom:0}
+.dome--bot{bottom:0;height:min(70vh,60vw);background-size:100% auto;background-position:center 62%;-webkit-mask-image:linear-gradient(180deg,transparent,#000 34%);mask-image:linear-gradient(180deg,transparent,#000 34%)}
 .final{position:relative;overflow:hidden}
 .final .wrap{position:relative;z-index:1}
-@media (max-width:900px){.dome{--R:170vw;--edge:30vw;height:min(44vh,100vw)}.dome--bot{--edge:16vw;height:min(30vh,60vw)}}
+@media (max-width:900px){.dome--top{bottom:auto;height:150vh}.dome--bot{height:min(40vh,70vw);background-size:cover;background-position:center bottom}}
 """
 h = h.replace('/* ---------- mobile ---------- */', cssd + '\n/* ---------- mobile ---------- */', 1)
 
