@@ -226,7 +226,6 @@ css2 = """
 .fecho .abra{font-family:var(--ffd);font-weight:700;font-size:clamp(2rem,5vw,4rem);letter-spacing:-.04em;line-height:1;background:var(--og);-webkit-background-clip:text;background-clip:text;color:transparent}
 @media (max-width:900px){
   .intro,.travas,.comp .qs,.fecho .tres{grid-template-columns:1fr}
-  .fecho .tres div{padding:0}
 }
 """
 h = h.replace('/* ---------- mobile ---------- */', css2 + '\n/* ---------- mobile ---------- */', 1)
