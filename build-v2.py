@@ -398,7 +398,6 @@ h = h.replace('<section class="sec" id="dentro">', '<section class="sec" id="den
 h = h.replace('<section class="sec" id="planos">', '<section class="sec" id="planos" style="padding-top:0">')
 
 # ---------- seções claras: planos e perguntas (garantia escura no meio) ----------
-h = h.replace('<section class="sec" id="planos" style="padding-top:0">', '<section class="sec sec--light" id="planos">')
 h = h.replace('<section class="sec" id="garantia" style="padding-top:0">', '<section class="sec" id="garantia">')
 h = h.replace('<section class="sec" id="duvidas" style="padding-top:0">', '<section class="sec sec--light" id="duvidas">')
 cssl = """
