@@ -6,7 +6,7 @@ def cut(h, start, end):
     a = h.index(start); b = h.index(end, a)
     return h[:a] + h[b:]
 
-h = h.replace('A MALETA DO ADVOGADO · E3 DIGITAL · v2', 'A MALETA DO ADVOGADO · E3 DIGITAL · v2 curta: herói, entregáveis, planos')
+h = h.replace('A MALETA DO ADVOGADO · E3 COMPANY · v2', 'A MALETA DO ADVOGADO · E3 COMPANY · v2 curta: herói, entregáveis, planos')
 
 # ---------- CSS extra (antes do bloco mobile) ----------
 css = '''
